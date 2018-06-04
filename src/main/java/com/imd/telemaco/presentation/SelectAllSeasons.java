@@ -15,7 +15,7 @@ import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
 
 public class SelectAllSeasons extends HttpServlet {
@@ -37,7 +37,7 @@ public class SelectAllSeasons extends HttpServlet {
             String serieName = request.getParameter("serieName");
 
             SerieDAO serieDAO = new SerieDAO();
-            Serie serie = serieDAO.select(serieName);
+            Series serie = serieDAO.select(serieName);
             SeasonDAO seasonDAO = new SeasonDAO();
             ArrayList<Season> seasons = seasonDAO.selectAllSeasons(serie.getId());
 

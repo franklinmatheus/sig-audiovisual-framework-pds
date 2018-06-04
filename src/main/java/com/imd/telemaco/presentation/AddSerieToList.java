@@ -8,7 +8,7 @@ package com.imd.telemaco.presentation;
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -43,7 +43,7 @@ public class AddSerieToList extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             validate.addSerieToList(idUser, idSerie);
             
-            ArrayList<Serie> seriesList = validate.getSeriesList(idUser);
+            ArrayList<Series> seriesList = validate.getSeriesList(idUser);
             session.setAttribute("seriesList", seriesList);
             
             response.sendRedirect("Serie.jsp");

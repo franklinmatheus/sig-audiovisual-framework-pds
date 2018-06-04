@@ -12,7 +12,7 @@ import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserEpisodeDAO;
 import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Rating;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +46,7 @@ public class SelectSerie extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
 
             SerieDAO dao = SerieDAO.getInstance();
-            Serie serie = dao.select(id);
+            Series serie = dao.select(id);
 
             ValidateSerieServices validate = new ValidateSerieServices();
             ArrayList<Rating> ratings = validate.getRatings(id);

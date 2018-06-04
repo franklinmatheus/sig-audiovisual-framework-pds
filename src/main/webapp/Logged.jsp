@@ -5,12 +5,12 @@
 --%>
 
 
-<%@page import="com.imd.telemaco.entity.Serie"%>
+<%@page import="com.imd.telemaco.entity.Series"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.imd.telemaco.entity.User"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     User logged = new User();
     if (session.getAttribute("logged") == null) {
         response.sendRedirect("Login.jsp");
@@ -18,7 +18,7 @@
         logged = (User) (session.getAttribute("logged"));
     }
 
-    ArrayList<Serie> list = (ArrayList<Serie>) session.getAttribute("seriesList");
+    ArrayList<Series> list = (ArrayList<Series>) session.getAttribute("seriesList");
 %>
 <!DOCTYPE html>
 <html>
@@ -52,12 +52,12 @@
         <div>
             <h2>Your series</h2>
             <%
-            if (list.isEmpty()) {
+            	if (list.isEmpty()) {
             %>
             <p>You have no series in your list!</p>
             <%
-            } else {
-                for (Serie serie : list) {
+            	} else {
+                            for (Series serie : list) {
             %>
             <p> 
             <form action="RemoveSerieFromList" method="GET">

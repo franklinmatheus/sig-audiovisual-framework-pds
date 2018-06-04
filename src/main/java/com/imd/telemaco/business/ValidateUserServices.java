@@ -15,7 +15,7 @@ import com.imd.telemaco.data.DAOSerieSpecialOperations;
 import com.imd.telemaco.data.DAOUserSpecialOperations;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserDAO;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
 import java.util.ArrayList;
 
@@ -158,14 +158,14 @@ public class ValidateUserServices {
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
-    public ArrayList<Serie> getSeriesList(int idUser) throws DatabaseException, CloseConnectionException {
+    public ArrayList<Series> getSeriesList(int idUser) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations userDAO = UserDAO.getInstance();
         ArrayList<Integer> seriesIds = userDAO.selectSeries(idUser);
         
         DAOSerieSpecialOperations serieDAO = SerieDAO.getInstance();
-        ArrayList<Serie> series = new ArrayList<Serie>();
+        ArrayList<Series> series = new ArrayList<Series>();
         for(Integer currentSerieId : seriesIds) {
-            Serie serie = serieDAO.select(currentSerieId);
+            Series serie = serieDAO.select(currentSerieId);
             series.add(serie);
         }
         return series;

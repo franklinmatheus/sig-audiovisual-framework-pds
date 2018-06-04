@@ -20,12 +20,12 @@ import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 
 public class RegisterEpisode extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    ArrayList<Serie> series = new ArrayList<>();
+    ArrayList<Series> series = new ArrayList<>();
     ArrayList<Season> seasons = new ArrayList<>();
 
     public RegisterEpisode() {
@@ -48,7 +48,7 @@ public class RegisterEpisode extends HttpServlet {
             String synopsis = request.getParameter("epSynopsis");
             String time = request.getParameter("epTime");
 
-            Serie serie = (Serie) session.getAttribute("serie");
+            Series serie = (Series) session.getAttribute("serie");
 
             /*SeasonDAO seasonDAO = new SeasonDAO();
             seasons = seasonDAO.selectAllSeasons(serie.getId());
@@ -71,7 +71,7 @@ public class RegisterEpisode extends HttpServlet {
                 validate.validEpisodeInsert(episode);
                 
                 SerieDAO dao = SerieDAO.getInstance();
-                Serie updateSerie = dao.select(serie.getId());
+                Series updateSerie = dao.select(serie.getId());
                 session.setAttribute("serie", updateSerie);
                 
                 response.sendRedirect("Serie.jsp");

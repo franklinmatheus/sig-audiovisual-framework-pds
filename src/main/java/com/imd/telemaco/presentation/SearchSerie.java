@@ -9,7 +9,7 @@ import com.imd.telemaco.business.ValidateSerieServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.NoResultsException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -39,7 +39,7 @@ public class SearchSerie extends HttpServlet {
         try {
             String input = request.getParameter("input");
             ValidateSerieServices validate = new ValidateSerieServices();
-            ArrayList<Serie> results = validate.search(input);
+            ArrayList<Series> results = validate.search(input);
             HttpSession session = request.getSession();
             session.setAttribute("results", results);
             response.sendRedirect("SearchResult.jsp");

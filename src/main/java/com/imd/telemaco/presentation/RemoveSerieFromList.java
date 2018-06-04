@@ -8,7 +8,7 @@ package com.imd.telemaco.presentation;
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -42,7 +42,7 @@ public class RemoveSerieFromList extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             validate.removeSerieFromList(idUser, idSerie);
             
-            ArrayList<Serie> seriesList = validate.getSeriesList(idUser);
+            ArrayList<Series> seriesList = validate.getSeriesList(idUser);
             
             HttpSession session = request.getSession(true);
             session.setAttribute("seriesList", seriesList);

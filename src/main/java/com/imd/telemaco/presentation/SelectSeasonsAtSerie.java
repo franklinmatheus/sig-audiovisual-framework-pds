@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 
 /**
  * Servlet implementation class SelectSeasonAtSerie
@@ -33,7 +33,7 @@ public class SelectSeasonsAtSerie extends HttpServlet {
         try {
             String serieName = request.getParameter("serieName");
             SerieDAO serieDAO = new SerieDAO();
-            Serie serie = serieDAO.select(serieName);
+            Series serie = serieDAO.select(serieName);
 
             SeasonDAO seasonDAO = new SeasonDAO();
             ArrayList<Season> seasons = seasonDAO.selectAllSeasons(serie.getId());

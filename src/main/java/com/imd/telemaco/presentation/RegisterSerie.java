@@ -5,7 +5,7 @@ import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.SerieExistsException;
 import com.imd.telemaco.business.exception.SerieInvalidException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.enums.Classification;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class RegisterSerie extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            Serie serie = new Serie();
+            Series serie = new Series();
 
             String name = request.getParameter("name");
             String year = request.getParameter("year");
@@ -53,7 +53,7 @@ public class RegisterSerie extends HttpServlet {
             int yearInt = Integer.parseInt(year);
             Classification classification = serie.stringToClassif(classif);
 
-            serie = new Serie(name, yearInt, status, creator, classification, genre, synopsis, image);
+            serie = new Series(name, yearInt, status, creator, classification, genre, synopsis, image);
 
             if ((name == null || name.isEmpty())) {
                 response.sendRedirect("RegisterSerie.jsp");

@@ -7,8 +7,9 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.enums.Classification;
 
 import java.sql.Connection;
@@ -53,7 +54,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
     
     @Override
-    public void insert(Serie serie) throws DatabaseException, CloseConnectionException {
+    public void insert(Series serie) throws DatabaseException, CloseConnectionException {
         String sql = "INSERT INTO telemaco.serie (name, year, status, creator, classification, genre, synopsis, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -82,9 +83,9 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
     
     @Override
-    public Serie select(int id) throws DatabaseException, CloseConnectionException {
+    public Series select(int id) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.serie WHERE id='" + id + "'";
-        Serie serie = new Serie();
+        Series serie = new Series();
         
         try {
             this.startsConnection();
@@ -105,8 +106,9 @@ public class SerieDAO implements DAOSerieSpecialOperations {
                 SeasonDAO seasonDAO = new SeasonDAO();
                 ArrayList<Season> seasons = seasonDAO.selectAllSeasons(id);
                 Classification classification = serie.stringToClassif(classif);
+                ArrayList<Rating> ratings = new ArrayList<>();
                 
-                serie = new Serie(id, name, year, status, creator, classification, genre, synopsis, image, seasons);
+                serie = new Series(id, name, year, status, creator, classification, ratings, genre, synopsis, image, seasons);
             } else
                 serie = null;
             
@@ -124,9 +126,9 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     
 
     @Override
-    public Serie select (String name) throws DatabaseException, CloseConnectionException {
+    public Series select (String name) throws DatabaseException, CloseConnectionException {
     	String sql = "SELECT * FROM telemaco.serie WHERE name='" + name + "'";
-    	Serie serie = null;    	
+    	Series serie = null;    	
 
     	try {
             this.startsConnection();
@@ -152,8 +154,8 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
     
     @Override
-    public ArrayList<Serie> selectAllSeries () throws DatabaseException, CloseConnectionException {
-    	ArrayList <Serie> series = new ArrayList<Serie>();
+    public ArrayList<Series> selectAllSeries () throws DatabaseException, CloseConnectionException {
+    	ArrayList <Series> series = new ArrayList<Series>();
     	String sql = "SELECT * FROM telemaco.serie";
     	
     	try {
@@ -164,7 +166,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
 
             while (result.next()) {
             	int id = result.getInt("id");
-                Serie serie = select(id);
+                Series serie = select(id);
                 series.add(serie);
             }
 
@@ -181,7 +183,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
 
     @Override
-    public void delete(Serie serie) throws DatabaseException, CloseConnectionException {
+    public void delete(Series serie) throws DatabaseException, CloseConnectionException {
         String sql = "DELETE FROM telemaco.user WHERE id='" + serie.getId() + "'";
         try {
             this.startsConnection();
@@ -200,7 +202,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
    
     @Override
-    public void update(Serie serie) throws DatabaseException, CloseConnectionException {
+    public void update(Series serie) throws DatabaseException, CloseConnectionException {
         String sql = "UPDATE telemaco.user SET "
                 + "name=?, "
                 + "year=?, "
@@ -237,9 +239,9 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
 
     @Override
-    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException {
+    public ArrayList<Series> search(String input) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * from telemaco.serie WHERE LOWER(name) LIKE '%" + input.toLowerCase() + "%'";
-        ArrayList<Serie> results = new ArrayList<Serie>();
+        ArrayList<Series> results = new ArrayList<Series>();
         
         try {
             this.startsConnection();
@@ -249,7 +251,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             
             while(set.next()) {
                 int id = set.getInt("id");
-                Serie serie = select(id);
+                Series serie = select(id);
                 results.add(serie);
             }
             

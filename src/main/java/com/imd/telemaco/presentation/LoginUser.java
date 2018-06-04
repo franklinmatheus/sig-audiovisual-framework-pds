@@ -9,7 +9,7 @@ import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.UserNotExistsException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,7 +42,7 @@ public class LoginUser extends HttpServlet {
         try {
             ValidateUserServices validate = new ValidateUserServices();
             User user = validate.login(request.getParameter("email"), request.getParameter("password"));
-            ArrayList<Serie> seriesList = validate.getSeriesList(user.getId());
+            ArrayList<Series> seriesList = validate.getSeriesList(user.getId());
             
             HttpSession session = request.getSession(true);
             session.setAttribute("logged", user);

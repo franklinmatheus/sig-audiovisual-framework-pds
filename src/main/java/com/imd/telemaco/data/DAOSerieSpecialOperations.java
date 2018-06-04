@@ -7,14 +7,14 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Serie;
+import com.imd.telemaco.entity.Series;
 import java.util.ArrayList;
 
 /**
  *
  * @author franklin
  */
-public interface DAOSerieSpecialOperations extends DAO<Serie> {
+public interface DAOSerieSpecialOperations extends DAO<Series> {
     /**
      * Select a serie by name.
      * @param name
@@ -22,7 +22,7 @@ public interface DAOSerieSpecialOperations extends DAO<Serie> {
      * @throws DatabaseException 
      * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public Serie select (String name) throws DatabaseException, CloseConnectionException;
+    public Series select (String name) throws DatabaseException, CloseConnectionException;
     
     /**
      * Select all series and return an array with them.
@@ -30,7 +30,7 @@ public interface DAOSerieSpecialOperations extends DAO<Serie> {
      * @throws DatabaseException 
      * @throws com.imd.telemaco.business.exception.CloseConnectionException 
      */
-    public ArrayList<Serie> selectAllSeries () throws DatabaseException, CloseConnectionException;
+    public ArrayList<Series> selectAllSeries () throws DatabaseException, CloseConnectionException;
     
     /**
      * Search series by name that user inputs.
@@ -39,5 +39,5 @@ public interface DAOSerieSpecialOperations extends DAO<Serie> {
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
-    public ArrayList<Serie> search(String input) throws DatabaseException, CloseConnectionException;
+    public ArrayList<Series> search(String input) throws DatabaseException, CloseConnectionException;
 }
