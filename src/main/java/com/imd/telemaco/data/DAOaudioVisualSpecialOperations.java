@@ -27,12 +27,16 @@ public interface DAOaudioVisualSpecialOperations extends DAO<AudioVisual> {
 	 * Returns AudioVisual ArrayList that corresponds with the input 
 	 * @param  input
 	 * @return audioVisuals
+	 * @throws DatabaseException 
+	 * @throws CloseConnectionException 
 	 */
-	public ArrayList<AudioVisual> search (String input);
+	public ArrayList<AudioVisual> search (String input) throws DatabaseException, CloseConnectionException;
 	
 	/**
 	 * Returns all the AudioVisuals
 	 * @return audioVisuals
+	 * @throws DatabaseException 
+	 * @throws CloseConnectionException 
 	  */
-	public ArrayList<AudioVisual> sellectAllAudioVisuals ();
+	public ArrayList<AudioVisual> sellectAllAudioVisuals () throws DatabaseException, CloseConnectionException;
 }

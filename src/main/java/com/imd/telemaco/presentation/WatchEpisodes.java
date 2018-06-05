@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.data.AudioVisualDAO;
 import com.imd.telemaco.data.EpisodeDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserEpisodeDAO;
+import com.imd.telemaco.entity.AudioVisual;
 import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Series;
@@ -43,10 +45,10 @@ public class WatchEpisodes extends HttpServlet {
         User user = (User) session.getAttribute("logged");
 
         try {
-            SerieDAO dao = new SerieDAO();
-            ArrayList<Series> series = dao.selectAllSeries();
-            for (Series serie : series) {
-                ArrayList<Season> seasons = serie.getSeasons();
+            AudioVisualDAO dao = new SerieDAO();
+            ArrayList<AudioVisual> series = dao.sellectAllAudioVisuals();
+            for (AudioVisual serie : series) {
+                ArrayList<Season> seasons = ((Series) serie).getSeasons();
                 if (seasons == null) {
                     break;
                 }
