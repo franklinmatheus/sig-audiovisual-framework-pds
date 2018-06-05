@@ -7,6 +7,7 @@ package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+import com.imd.telemaco.entity.AudioVisual;
 import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Series;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author franklin
  */
-public class SerieDAO implements DAOSerieSpecialOperations {
+public class SerieDAO extends AudioVisualDAO {
     private Connection connection;
     private static SerieDAO serieDAO = null;
     
@@ -44,31 +45,24 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         return serieDAO;
     }
     
-    private void startsConnection() throws DatabaseException {
-        try {
-            if(this.connection.isClosed())
-                this.connection = ConnectionFactory.getConnection();
-        } catch (SQLException e) {
-            throw new DatabaseException();
-        }   
-    }
-    
     @Override
-    public void insert(Series serie) throws DatabaseException, CloseConnectionException {
+    public void insert (AudioVisual audioVisual) throws DatabaseException, CloseConnectionException {
         String sql = "INSERT INTO telemaco.serie (name, year, status, creator, classification, genre, synopsis, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+        Series series = (Series) audioVisual;
+        
         try {
-            this.startsConnection();
+            super.startsConnection();
             
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, serie.getName());
-            stm.setInt(2, serie.getYear());
-            stm.setString(3, serie.getStatus());
-            stm.setString(4,  serie.getCreator());
-            stm.setString(5, serie.classifToString());
-            stm.setString(6, serie.getGenre());
-            stm.setString(7, serie.getSynopsis());
-            stm.setString(8, serie.getImage());
+            stm.setString(1, series.getName());
+            stm.setInt(2, series.getYear());
+            stm.setString(3, series.getStatus());
+            stm.setString(4,  series.getCreator());
+            stm.setString(5, series.classifToString());
+            stm.setString(6, series.getGenre());
+            stm.setString(7, series.getSynopsis());
+            stm.setString(8, series.getImage());
             
             stm.execute();
         } catch (SQLException e) {
@@ -83,7 +77,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     }
     
     @Override
-    public Series select(int id) throws DatabaseException, CloseConnectionException {
+    public Series select (int id) throws DatabaseException, CloseConnectionException {
         String sql = "SELECT * FROM telemaco.serie WHERE id='" + id + "'";
         Series serie = new Series();
         
@@ -92,7 +86,7 @@ public class SerieDAO implements DAOSerieSpecialOperations {
             
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
-
+            
             if(result.next()) {
                 String name     = result.getString("name");
                 int    year     = result.getInt("year");
@@ -116,11 +110,8 @@ public class SerieDAO implements DAOSerieSpecialOperations {
         } catch(SQLException e) {
             throw new DatabaseException();
         } finally {
-//            try {
-//                connection.close();
-//            } catch(SQLException e) {
-//                throw new CloseConnectionException();
-//            }
+            /*try { connection.close(); } 
+            catch (SQLException e) { throw new CloseConnectionException(); }*/
         }
     }
     
@@ -138,18 +129,15 @@ public class SerieDAO implements DAOSerieSpecialOperations {
     		
             if (result.next()) {
     		int id = result.getInt("id");
-                serie = select(id);
+                serie = (Series) select(id);
             }
             
             return serie;
     	} catch (SQLException e) {
             throw new DatabaseException();
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new CloseConnectionException();
-            }
+            try { connection.close(); } 
+            catch (SQLException e) { throw new CloseConnectionException(); }
         }
     }
     
