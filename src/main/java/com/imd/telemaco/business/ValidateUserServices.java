@@ -158,14 +158,14 @@ public class ValidateUserServices {
      * @throws DatabaseException
      * @throws CloseConnectionException 
      */
-    public ArrayList<Series> getSeriesList(int idUser) throws DatabaseException, CloseConnectionException {
+    public ArrayList<AudioVisual> getAudioVisualList(int idUser) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations userDAO = UserDAO.getInstance();
-        ArrayList<Integer> seriesIds = userDAO.selectSeries(idUser);
+        ArrayList<Integer> audioVisualIds = userDAO.selectAudioVisual(idUser);
         
-        DAOSerieSpecialOperations serieDAO = SerieDAO.getInstance();
-        ArrayList<Series> series = new ArrayList<Series>();
+        DAOAudioVisualSpecialOperations audioVisualDAO = AudioVisualDAO.getInstance();
+        ArrayList<AudioVisual> AudioVisualArray = new ArrayList<AudioVisual>();
         for(Integer currentSerieId : seriesIds) {
-            Series serie = serieDAO.select(currentSerieId);
+        	AudioVisual audioVisual = audioVisualDAO.select(currentSerieId);
             series.add(serie);
         }
         return series;
