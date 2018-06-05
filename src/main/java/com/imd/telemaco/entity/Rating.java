@@ -20,8 +20,7 @@ public class Rating {
     private User user;
     private int idSerie;
     
-    public void Rating() {
-    }
+    public Rating() { }
 
     public int getId() {
         return id;

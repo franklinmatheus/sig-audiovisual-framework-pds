@@ -50,12 +50,8 @@ public abstract class AudioVisual {
 	 * @param image
 	 */
 	public AudioVisual (int id, String name, String status, String synopsis, String image, Classification classification, ArrayList<Rating> ratings) {
+		this(name, status, synopsis, image, classification);
 		this.id 	  = id;
-		this.name 	  = name;
-		this.status   = status;
-		this.synopsis = synopsis;
-		this.image 	  = image;
-		this.classification = classification;
 		this.ratings  = ratings;
 	}
 	
