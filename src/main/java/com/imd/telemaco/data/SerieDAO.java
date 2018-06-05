@@ -142,55 +142,18 @@ public class SerieDAO extends AudioVisualDAO {
     }
     
     @Override
-    public ArrayList<Series> selectAllSeries () throws DatabaseException, CloseConnectionException {
-    	ArrayList <Series> series = new ArrayList<Series>();
-    	String sql = "SELECT * FROM telemaco.serie";
-    	
-    	try {
-            this.startsConnection();
-            
-            Statement stm = connection.createStatement();
-            ResultSet result = stm.executeQuery(sql);
-
-            while (result.next()) {
-            	int id = result.getInt("id");
-                Series serie = select(id);
-                series.add(serie);
-            }
-
-            return series;
-    	} catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
-    	} finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new CloseConnectionException();
-            }
-        }
+    public String sqlSellectAllAudioVisual () {
+    	return "SELECT * FROM telemaco.serie";
     }
 
     @Override
-    public void delete(Series serie) throws DatabaseException, CloseConnectionException {
-        String sql = "DELETE FROM telemaco.user WHERE id='" + serie.getId() + "'";
-        try {
-            this.startsConnection();
-            
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
-        } catch(SQLException e) {
-            throw new RuntimeException();
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new CloseConnectionException();
-            }
-        }
+    public String sqlDelete(int id) {
+    	return "DELETE FROM telemaco.user WHERE id='" + id + "'";
     }
    
     @Override
-    public void update(Series serie) throws DatabaseException, CloseConnectionException {
+    public void update(AudioVisual audioVisual) throws DatabaseException, CloseConnectionException {
+    	Series series = (Series) audioVisual;
         String sql = "UPDATE telemaco.user SET "
                 + "name=?, "
                 + "year=?, "
@@ -204,15 +167,15 @@ public class SerieDAO extends AudioVisualDAO {
         try {
             this.startsConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, serie.getName());
-            stm.setInt(2, serie.getYear());
-            stm.setString(3, serie.getStatus());
-            stm.setString(4,  serie.getCreator());
-            stm.setString(5, serie.classifToString());
-            stm.setString(6, serie.getGenre());
-            stm.setString(7, serie.getSynopsis());
-            stm.setString(8, serie.getImage());
-            stm.setInt(9, serie.getId());
+            stm.setString(1, series.getName());
+            stm.setInt(2, series.getYear());
+            stm.setString(3, series.getStatus());
+            stm.setString(4,  series.getCreator());
+            stm.setString(5, series.classifToString());
+            stm.setString(6, series.getGenre());
+            stm.setString(7, series.getSynopsis());
+            stm.setString(8, series.getImage());
+            stm.setInt(9, series.getId());
             
             stm.execute();
         } catch(SQLException e) {
@@ -227,32 +190,7 @@ public class SerieDAO extends AudioVisualDAO {
     }
 
     @Override
-    public ArrayList<Series> search(String input) throws DatabaseException, CloseConnectionException {
-        String sql = "SELECT * from telemaco.serie WHERE LOWER(name) LIKE '%" + input.toLowerCase() + "%'";
-        ArrayList<Series> results = new ArrayList<Series>();
-        
-        try {
-            this.startsConnection();
-            
-            Statement statement = connection.createStatement();
-            ResultSet set = statement.executeQuery(sql);
-            
-            while(set.next()) {
-                int id = set.getInt("id");
-                Series serie = select(id);
-                results.add(serie);
-            }
-            
-            return results;
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            throw new DatabaseException();
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                throw new CloseConnectionException();
-            }
-        }
+    public String sqlSearch (String input) {
+        return "SELECT * from telemaco.serie WHERE LOWER(name) LIKE '%" + input.toLowerCase() + "%'";        
     }
 }
