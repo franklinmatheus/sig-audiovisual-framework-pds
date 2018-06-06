@@ -11,10 +11,13 @@ import com.imd.telemaco.business.exception.ConfirmInputsException;
 import com.imd.telemaco.business.exception.UserAlreadyExistsException;
 import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.business.exception.ValidateException;
+import com.imd.telemaco.data.AudioVisualDAO;
 import com.imd.telemaco.data.DAOSerieSpecialOperations;
 import com.imd.telemaco.data.DAOUserSpecialOperations;
+import com.imd.telemaco.data.DAOaudioVisualSpecialOperations;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserDAO;
+import com.imd.telemaco.entity.AudioVisual;
 import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
 import java.util.ArrayList;
@@ -160,15 +163,15 @@ public class ValidateUserServices {
      */
     public ArrayList<AudioVisual> getAudioVisualList(int idUser) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations userDAO = UserDAO.getInstance();
-        ArrayList<Integer> audioVisualIds = userDAO.selectAudioVisual(idUser);
+        ArrayList<Integer> audioVisualIds = userDAO.selectAudioVisual(idUser); // tem que refatorar o userDAO
         
-        DAOAudioVisualSpecialOperations audioVisualDAO = AudioVisualDAO.getInstance();
-        ArrayList<AudioVisual> AudioVisualArray = new ArrayList<AudioVisual>();
-        for(Integer currentSerieId : seriesIds) {
-        	AudioVisual audioVisual = audioVisualDAO.select(currentSerieId);
-            series.add(serie);
+        DAOaudioVisualSpecialOperations audioVisualDAO = AudioVisualDAO.getInstance(); // Xlynha vai ajeitar o AudioVisualDAO
+        ArrayList<AudioVisual> audioVisualArray = new ArrayList<AudioVisual>();
+        for(Integer currentAudioVisualId : audioVisualIds) {
+        	AudioVisual audioVisual = audioVisualDAO.select(currentAudioVisualId);
+        	audioVisualArray.add(audioVisual);
         }
-        return series;
+        return audioVisualArray;
     }
     
     /**
