@@ -9,11 +9,11 @@
 <%@page import="com.imd.telemaco.entity.Episode"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.imd.telemaco.entity.Season"%>
-<%@page import="com.imd.telemaco.entity.Serie"%>
+<%@page import="com.imd.telemaco.entity.Series"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     User logged = new User();
     if (session.getAttribute("logged") == null) {
         response.sendRedirect("Login.jsp");
@@ -22,14 +22,14 @@
     }
     
     ArrayList<Episode> episodesSeen = (ArrayList<Episode>) session.getAttribute("episodesSeen");
-    Serie serie = (Serie) session.getAttribute("serie");
+    Series serie = (Series) session.getAttribute("serie");
 
     if (serie == null) {
         response.sendRedirect("Logged.jsp");
     }
 
     ArrayList<Rating> ratings = (ArrayList<Rating>) session.getAttribute("ratings");
-    ArrayList<Serie> list = (ArrayList<Serie>) session.getAttribute("seriesList");
+    ArrayList<Series> list = (ArrayList<Series>) session.getAttribute("seriesList");
     
     boolean alreadyRated = false;
     boolean alreadyOnList = false;
@@ -38,7 +38,7 @@
         if(rating.getUser().getId() == logged.getId())
             alreadyRated = true;
             
-    for(Serie current : list)
+    for(Series current : list)
         if(current.getId() == serie.getId())
             alreadyOnList = true;
 %>

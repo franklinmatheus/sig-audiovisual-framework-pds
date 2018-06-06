@@ -164,14 +164,7 @@ public class ValidateUserServices {
      */
     public ArrayList<AudioVisual> getAudioVisualList(int idUser) throws DatabaseException, CloseConnectionException {
         DAOUserSpecialOperations userDAO = UserDAO.getInstance();
-        ArrayList<Integer> audioVisualIds = userDAO.selectAudioVisual(idUser); //ver se o merge com da Xylinha resolve
-        
-        DAOAudioVisualSpecialOperations audioVisualDAO = AudiovisualDAO.getInstanceAudioVisual();
-        ArrayList<AudioVisual> audioVisualArray = new ArrayList<AudioVisual>();
-        for(Integer currentAudioVisualId : audioVisualIds) {
-        	AudioVisual audioVisual = audioVisualDAO.select(currentAudioVisualId);
-        	audioVisualArray.add(audioVisual);
-        }
+        ArrayList<AudioVisual> audioVisualArray = new ArrayList<>();
         return audioVisualArray;
     }
     

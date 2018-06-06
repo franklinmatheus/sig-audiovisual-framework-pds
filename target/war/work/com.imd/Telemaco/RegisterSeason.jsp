@@ -1,11 +1,11 @@
 <%@page import="com.imd.telemaco.entity.Season"%>
 <%@page import="com.imd.telemaco.entity.User"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.imd.telemaco.entity.Serie" %>
+<%@ page import="com.imd.telemaco.entity.Series" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     User logged = new User();
     if (session.getAttribute("logged") == null) {
         response.sendRedirect("Login.jsp");
@@ -13,7 +13,7 @@
         logged = (User) (session.getAttribute("logged"));
     }
     
-    Serie serie = (Serie) session.getAttribute("serie");
+    Series serie = (Series) session.getAttribute("serie");
     int numberSeasons = serie.getSeasons().size();
     int nextSeason = numberSeasons + 1;
 %>

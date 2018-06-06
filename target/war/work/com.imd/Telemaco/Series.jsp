@@ -6,14 +6,14 @@
 
 <%@page import="com.imd.telemaco.entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.imd.telemaco.entity.Serie" %>
+<%@ page import="com.imd.telemaco.entity.Series" %>
 <%@ page import="com.imd.telemaco.entity.Season" %>
 <%@ page import="com.imd.telemaco.entity.Episode" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.SQLException" %>
 <!DOCTYPE html>
-<% 
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     User logged = new User();
     if(session.getAttribute("logged") == null)
         response.sendRedirect("Login.jsp");
@@ -28,13 +28,13 @@
     <body>
         <h1>Séries</h1>
         <%
-            ArrayList<Serie> series;
-            if (session.getAttribute("series") == null)
-                response.sendRedirect("SelectAllSeries");
-            else {
-                series = (ArrayList<Serie>) session.getAttribute("series");
+        	ArrayList<Series> series;
+                    if (session.getAttribute("series") == null)
+                        response.sendRedirect("SelectAllSeries");
+                    else {
+                        series = (ArrayList<Series>) session.getAttribute("series");
 
-                for (Serie s : series) {
+                        for (Series s : series) {
         %> 
         <p> <a href="SelectSerie?id=<%=s.getId()%>"> <%=s.getName()%> </a> </p>
         <%
