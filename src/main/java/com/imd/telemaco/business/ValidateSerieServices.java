@@ -11,6 +11,7 @@ import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.data.RatingDAO;
 import com.imd.telemaco.data.DAORatingSpecialOperations;
 import com.imd.telemaco.data.SerieDAO;
+import com.imd.telemaco.entity.AudioVisual;
 import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
@@ -75,8 +76,8 @@ public class ValidateSerieServices {
      * @throws SerieExistsException
      */
     private void serieExist(Series serie) throws SerieExistsException, DatabaseException, CloseConnectionException {
-        SerieDAO dao = SerieDAO.getInstance();
-        Series exists = dao.select(serie.getId());
+        SerieDAO dao = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+        Series exists = (Series) dao.select(serie.getId());
         if (null == exists) {
             throw new SerieExistsException("Essa serie não existe!");
         }
@@ -106,8 +107,8 @@ public class ValidateSerieServices {
      * @throws SeasonExistsException
      */
     public void validSerieRemove(Series serie) throws SeasonExistsException, DatabaseException, CloseConnectionException {
-        SerieDAO serieDAO = SerieDAO.getInstance();
-        Series serieRemove = serieDAO.select(serie.getId());
+        SerieDAO serieDAO = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+        Series serieRemove = (Series) serieDAO.select(serie.getId());
         if (null != serieRemove) {
             throw new SeasonExistsException("A serie '" + serie.getName() + "' não existe!");
         }
@@ -124,8 +125,8 @@ public class ValidateSerieServices {
      */
     public void validSerieUpdate(Series serie) throws SerieInvalidException, SerieExistsException, DatabaseException, CloseConnectionException {
         this.validSerieName(serie);
-        SerieDAO serieDAO = SerieDAO.getInstance();
-        Series serieUpdate = serieDAO.select(serie.getId());
+        SerieDAO serieDAO = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+        Series serieUpdate = (Series) serieDAO.select(serie.getId());
         if (serieUpdate == null) {
             throw new SerieExistsException("Impossível atualizar, esta serie não existe!");
         }
@@ -155,9 +156,9 @@ public class ValidateSerieServices {
      * @throws CloseConnectionException
      * @throws NoResultsException 
      */
-    public ArrayList<Series> search(String input) throws DatabaseException, CloseConnectionException, NoResultsException {
-        SerieDAO dao = SerieDAO.getInstance();
-        ArrayList<Series> results = dao.search(input);
+    public ArrayList<AudioVisual> search(String input) throws DatabaseException, CloseConnectionException, NoResultsException {
+        SerieDAO dao = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+        ArrayList<AudioVisual> results = dao.search(input);
         
         if(results.isEmpty())
             throw new NoResultsException();

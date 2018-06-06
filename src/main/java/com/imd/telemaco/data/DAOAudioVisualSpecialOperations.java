@@ -12,7 +12,7 @@ import com.imd.telemaco.entity.AudioVisual;
  * @author  Shirley Ohara Telemaco de Freitas (shirleyohara@ufrn.edu.br)
  * @version 5 de jun de 2018 | 09:46:45
  */
-public interface DAOaudioVisualSpecialOperations extends DAO<AudioVisual> {
+public interface DAOAudioVisualSpecialOperations extends DAO<AudioVisual> {
 	
 	/**
 	 * Returns a AudioVisual by the name past
