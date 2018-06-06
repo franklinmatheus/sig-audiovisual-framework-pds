@@ -1,6 +1,7 @@
 package com.imd.telemaco.presentation;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import com.imd.telemaco.data.SeasonDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Series;
-import com.imd.telemaco.entity.User;
+//import com.imd.telemaco.entity.User;
 
 public class SelectAllSeasons extends HttpServlet {
 
@@ -31,13 +32,13 @@ public class SelectAllSeasons extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession(true);
-        User user = (User) session.getAttribute("logged");
+        //User user = (User) session.getAttribute("logged"); to usando a onde ????
 
         try {
             String serieName = request.getParameter("serieName");
 
             SerieDAO serieDAO = new SerieDAO();
-            Series serie = serieDAO.select(serieName);
+            Series serie = (Series) serieDAO.select(serieName);
             SeasonDAO seasonDAO = new SeasonDAO();
             ArrayList<Season> seasons = seasonDAO.selectAllSeasons(serie.getId());
 

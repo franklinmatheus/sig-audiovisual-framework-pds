@@ -1,10 +1,9 @@
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.SerieServices;
+import com.imd.telemaco.business.exception.AudiovisualInvalidException;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.business.exception.SerieExistsException;
-import com.imd.telemaco.business.exception.SerieInvalidException;
 import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.enums.Classification;
 
@@ -61,12 +60,17 @@ public class RegisterSerie extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.getAttribute("logged");
                
-                ValidateSerieServices validate = new ValidateSerieServices();
-                validate.validSerieInsert(serie);
+                SerieServices validate = new SerieServices();
+                try {
+					validate.validate(serie);
+				} catch (AudiovisualInvalidException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 //TODO mensagem que foi insedira com sucesso
                 response.sendRedirect("Logged.jsp");
             }
-        } catch (SerieExistsException | SerieInvalidException | DatabaseException | CloseConnectionException e) {
+        } catch (DatabaseException | CloseConnectionException e) {
             e.getMessage();
             response.sendRedirect("Error.jsp");
         } finally {

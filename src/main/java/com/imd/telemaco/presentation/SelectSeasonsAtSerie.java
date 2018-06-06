@@ -2,8 +2,16 @@ package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+
+import com.imd.telemaco.data.SeasonDAO;
+import com.imd.telemaco.data.SerieDAO;
+
+import com.imd.telemaco.entity.Season;
+import com.imd.telemaco.entity.Series;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,11 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.imd.telemaco.data.SeasonDAO;
-import com.imd.telemaco.data.SerieDAO;
-import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Series;
 
 /**
  * Servlet implementation class SelectSeasonAtSerie
@@ -33,7 +36,7 @@ public class SelectSeasonsAtSerie extends HttpServlet {
         try {
             String serieName = request.getParameter("serieName");
             SerieDAO serieDAO = new SerieDAO();
-            Series serie = serieDAO.select(serieName);
+            Series serie = (Series) serieDAO.select(serieName);
 
             SeasonDAO seasonDAO = new SeasonDAO();
             ArrayList<Season> seasons = seasonDAO.selectAllSeasons(serie.getId());
@@ -43,6 +46,8 @@ public class SelectSeasonsAtSerie extends HttpServlet {
 //            response.sendRedirect("RegisterEpisode.jsp");
         } catch (DatabaseException | CloseConnectionException e) {
             response.sendRedirect("Error.jsp");
+        } finally {
+            out.close();
         }
     }
 

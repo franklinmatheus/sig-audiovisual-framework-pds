@@ -5,7 +5,7 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.SerieServices;
 import com.imd.telemaco.business.ValidateUserServices;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
@@ -24,10 +24,16 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author franklin
+ * @author Valmir Correa (valmir.jr.correa@gmail.com)
  */
 public class AddRating extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -40,7 +46,7 @@ public class AddRating extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            ValidateSerieServices validateSerie = new ValidateSerieServices();
+            SerieServices validateSerie = new SerieServices();
             ValidateUserServices validateUser = new ValidateUserServices();
             
             String content = request.getParameter("content");

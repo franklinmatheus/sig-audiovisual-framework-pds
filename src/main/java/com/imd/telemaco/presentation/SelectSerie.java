@@ -1,23 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.SerieServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
+
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.data.UserEpisodeDAO;
+
 import com.imd.telemaco.entity.Episode;
 import com.imd.telemaco.entity.Rating;
 import com.imd.telemaco.entity.Series;
 import com.imd.telemaco.entity.User;
+
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,11 @@ import javax.servlet.http.HttpSession;
 public class SelectSerie extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -45,10 +51,10 @@ public class SelectSerie extends HttpServlet {
             HttpSession session = request.getSession(true);
             int id = Integer.parseInt(request.getParameter("id"));
 
-            SerieDAO dao = SerieDAO.getInstance();
-            Series serie = dao.select(id);
+            SerieDAO dao = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+            Series serie = (Series) dao.select(id);
 
-            ValidateSerieServices validate = new ValidateSerieServices();
+            SerieServices validate = new SerieServices();
             ArrayList<Rating> ratings = validate.getRatings(id);
             
             User user = (User) (session.getAttribute("logged"));

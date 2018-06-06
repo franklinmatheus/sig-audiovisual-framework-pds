@@ -6,7 +6,7 @@
 package com.imd.telemaco.presentation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +20,11 @@ import javax.servlet.http.HttpSession;
 public class LogoutUser extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *

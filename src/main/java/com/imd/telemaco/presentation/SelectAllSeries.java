@@ -7,7 +7,7 @@ package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.data.AudioVisualDAO;
+import com.imd.telemaco.data.AudiovisualDAO;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.AudioVisual;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class SelectAllSeries extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try {
-                AudioVisualDAO dao = new SerieDAO();
+                AudiovisualDAO dao = new SerieDAO();
                 ArrayList<AudioVisual> series = dao.sellectAllAudioVisuals();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("series", series);

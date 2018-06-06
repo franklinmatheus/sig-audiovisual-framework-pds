@@ -40,13 +40,13 @@ public class RegisterEpisode extends HttpServlet {
         session.getAttribute("logged");
 
         try {
-            Episode episode = new Episode();
-            String serieName = request.getParameter("serieName");
+            Episode episode 	= new Episode();
+            //String serieName 	= request.getParameter("serieName");
             String seasonNumber = request.getParameter("seasonNumber");
-            String name = request.getParameter("epName");
-            String number = request.getParameter("epNumber");
-            String synopsis = request.getParameter("epSynopsis");
-            String time = request.getParameter("epTime");
+            String name 		= request.getParameter("epName");
+            String number 		= request.getParameter("epNumber");
+            String synopsis 	= request.getParameter("epSynopsis");
+            String time 		= request.getParameter("epTime");
 
             Series serie = (Series) session.getAttribute("serie");
 
@@ -70,8 +70,8 @@ public class RegisterEpisode extends HttpServlet {
                 ValidateEpisodeServices validate = new ValidateEpisodeServices();
                 validate.validEpisodeInsert(episode);
                 
-                SerieDAO dao = SerieDAO.getInstance();
-                Series updateSerie = dao.select(serie.getId());
+                SerieDAO dao = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+                Series updateSerie = (Series) dao.select(serie.getId());
                 session.setAttribute("serie", updateSerie);
                 
                 response.sendRedirect("Serie.jsp");

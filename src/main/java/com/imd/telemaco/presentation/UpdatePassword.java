@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.ConfirmInputsException;
 import com.imd.telemaco.business.exception.DatabaseException;
+
 import com.imd.telemaco.entity.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +24,11 @@ import javax.servlet.http.HttpSession;
 public class UpdatePassword extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -49,6 +53,8 @@ public class UpdatePassword extends HttpServlet {
             response.sendRedirect("Logged.jsp");
         } catch (DatabaseException | CloseConnectionException | ConfirmInputsException e) {
             response.sendRedirect("UpdatePassword.jsp");
+        } finally {
+        	out.close();
         }
     }
 

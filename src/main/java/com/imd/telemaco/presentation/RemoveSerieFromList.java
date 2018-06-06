@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Series;
+import com.imd.telemaco.entity.AudioVisual;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +23,11 @@ import javax.servlet.http.HttpSession;
 public class RemoveSerieFromList extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -42,7 +46,7 @@ public class RemoveSerieFromList extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             validate.removeSerieFromList(idUser, idSerie);
             
-            ArrayList<Series> seriesList = validate.getSeriesList(idUser);
+            ArrayList<AudioVisual> seriesList = validate.getAudioVisualList(idUser);
             
             HttpSession session = request.getSession(true);
             session.setAttribute("seriesList", seriesList);

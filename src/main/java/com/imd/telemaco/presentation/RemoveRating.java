@@ -5,17 +5,16 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateSerieServices;
-import com.imd.telemaco.business.ValidateUserServices;
+import com.imd.telemaco.business.SerieServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.business.exception.UserNotExistsException;
 import com.imd.telemaco.entity.Rating;
-import com.imd.telemaco.entity.User;
+
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +28,11 @@ import javax.servlet.http.HttpSession;
 public class RemoveRating extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -41,7 +45,7 @@ public class RemoveRating extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            ValidateSerieServices validate = new ValidateSerieServices();
+            SerieServices validate = new SerieServices();
             
             int idRating = Integer.parseInt(request.getParameter("idRating"));
             int idSerie = Integer.parseInt(request.getParameter("idSerie"));

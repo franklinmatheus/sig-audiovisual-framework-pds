@@ -5,13 +5,17 @@
  */
 package com.imd.telemaco.presentation;
 
-import com.imd.telemaco.business.ValidateSerieServices;
+import com.imd.telemaco.business.SerieServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.business.exception.NoResultsException;
-import com.imd.telemaco.entity.Series;
+import com.imd.telemaco.entity.AudioVisual;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +29,11 @@ import javax.servlet.http.HttpSession;
 public class SearchSerie extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -38,8 +47,8 @@ public class SearchSerie extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String input = request.getParameter("input");
-            ValidateSerieServices validate = new ValidateSerieServices();
-            ArrayList<Series> results = validate.search(input);
+            SerieServices validate = new SerieServices();
+            ArrayList<AudioVisual> results = validate.search(input);
             HttpSession session = request.getSession();
             session.setAttribute("results", results);
             response.sendRedirect("SearchResult.jsp");

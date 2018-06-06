@@ -6,11 +6,14 @@
 package com.imd.telemaco.presentation;
 
 import com.imd.telemaco.business.ValidateUserServices;
+
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
-import com.imd.telemaco.entity.Series;
+import com.imd.telemaco.entity.AudioVisual;
+
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,11 @@ import javax.servlet.http.HttpSession;
 public class AddSerieToList extends HttpServlet {
 
     /**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -43,7 +51,7 @@ public class AddSerieToList extends HttpServlet {
             ValidateUserServices validate = new ValidateUserServices();
             validate.addSerieToList(idUser, idSerie);
             
-            ArrayList<Series> seriesList = validate.getSeriesList(idUser);
+            ArrayList<AudioVisual> seriesList = validate.getAudioVisualList(idUser);
             session.setAttribute("seriesList", seriesList);
             
             response.sendRedirect("Serie.jsp");

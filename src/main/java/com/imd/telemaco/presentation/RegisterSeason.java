@@ -18,7 +18,6 @@ import com.imd.telemaco.business.exception.SeasonIncompleteException;
 import com.imd.telemaco.data.SerieDAO;
 import com.imd.telemaco.entity.Season;
 import com.imd.telemaco.entity.Series;
-import com.imd.telemaco.entity.User;
 
 /**
  * Servlet implementation class ResgisterSeason
@@ -47,8 +46,8 @@ public class RegisterSeason extends HttpServlet {
             ValidateSeasonServices validate = new ValidateSeasonServices();
             validate.validSeasonInsert(season);
 
-            SerieDAO dao = SerieDAO.getInstance();
-            Series updateSerie = dao.select(serie.getId());
+            SerieDAO dao = (SerieDAO) SerieDAO.getInstanceAudioVisual();
+            Series updateSerie = (Series) dao.select(serie.getId());
             session.setAttribute("serie", updateSerie);
 
             response.sendRedirect("Serie.jsp");

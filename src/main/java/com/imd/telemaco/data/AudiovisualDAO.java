@@ -5,41 +5,35 @@ import java.util.ArrayList;
 import com.imd.telemaco.business.exception.CloseConnectionException;
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.AudioVisual;
-import com.imd.telemaco.entity.Rating;
-import com.imd.telemaco.entity.Season;
-import com.imd.telemaco.entity.Series;
-import com.imd.telemaco.entity.enums.Classification;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
  * @author Shirley Ohara Telemaco de Freitas (shirleyohara@ufrn.edu.br)
  * @version 5 de jun de 2018 | 09:52:54
  */
-public abstract class AudioVisualDAO implements DAOAudioVisualSpecialOperations {
+public abstract class AudiovisualDAO implements DAOAudioVisualSpecialOperations {
 
     private Connection connection;
-    private static AudioVisualDAO audioVisualDAO = null;
+    private static AudiovisualDAO audiovisualDAO = null;
     
     /*private static AudioVisualDAO audioVisualDAO = null;*/
     /**
      * Default Constructor
      */
-    public AudioVisualDAO() throws DatabaseException {
+    public AudiovisualDAO() throws DatabaseException {
         this.connection = ConnectionFactory.getConnection();
     }
     
-    public static synchronized AudioVisualDAO getInstanceAudioVisual() throws DatabaseException {
-        if (audioVisualDAO == null) {
-            audioVisualDAO = new SerieDAO();
+    public static synchronized AudiovisualDAO getInstanceAudioVisual() throws DatabaseException {
+        if (audiovisualDAO == null) {
+            audiovisualDAO = new SerieDAO();
         }
-        return audioVisualDAO;
+        return audiovisualDAO;
     }
 
     /**

@@ -6,6 +6,7 @@
 package com.imd.telemaco.data;
 
 import com.imd.telemaco.business.exception.CloseConnectionException;
+
 import com.imd.telemaco.business.exception.DatabaseException;
 import com.imd.telemaco.entity.AudioVisual;
 import com.imd.telemaco.entity.Rating;
@@ -17,14 +18,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
  *
  * @author franklin
  */
-public class SerieDAO extends AudioVisualDAO {
+public class SerieDAO extends AudiovisualDAO {
 
     private Connection connection;
 
